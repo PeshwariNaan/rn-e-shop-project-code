@@ -13,7 +13,7 @@ import {
 import Card from "../UI/Card";
 
 const ProductItem = (props) => {
-  //This block of code gives us the ripple effect when useing android devices
+  //This block of code gives us the ripple effect when useing android devices - not applicable for iOS
   let TouchableCmp = TouchableOpacity;
 
   if (Platform.OS === "android" && Platform.Version >= 21) {

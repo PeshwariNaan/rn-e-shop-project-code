@@ -14,7 +14,7 @@ const defaultNavOptions = {
   headerTintColor: Platform.OS === "android" ? "white" : Colors.primary,
 };
 
-// Set up first stack nav
+// Set up first stack nav - this will handle all navigation for Product Overview, Product Detail and the Cart screens
 const ProductsStackNavigator = createStackNavigator();
 
 export const ProductsNavigator = () => {

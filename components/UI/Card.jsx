@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
 const Card = (props) => {
+// The style syntax here allows us to use the styles defined in this component but also allows additional styles to be added or to override the styles here via props.
   return <View style={{...styles.card, ...props.style}}>{props.children}</View>;
 };
 
