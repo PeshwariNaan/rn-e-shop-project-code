@@ -4,7 +4,6 @@ import {
   Text,
   Image,
   StyleSheet,
-  Button,
   TouchableOpacity,
   TouchableNativeFeedback,
   Platform,
@@ -13,37 +12,41 @@ import {
 import Card from "../UI/Card";
 
 const ProductItem = (props) => {
-  //This block of code gives us the ripple effect when useing android devices - not applicable for iOS
+  //This block of code gives us the ripple effect when useing android devices - not applicable for iOS so we use the Platform api
   let TouchableCmp = TouchableOpacity;
 
   if (Platform.OS === "android" && Platform.Version >= 21) {
     TouchableCmp = TouchableNativeFeedback;
   }
 
- 
-
   return (
-    <TouchableCmp onPress={props.onSelect} useForeground>
-      <Card style={styles.product}>
-        <View style={styles.imageContainer}>
-          <Image style={styles.image} source={{ uri: props.image }} />
-        </View>
-        <View style={styles.details}>
-          <Text style={styles.title}>{props.title}</Text>
-          <Text style={styles.price}>${+props.price.toFixed(2)}</Text>
-        </View>
-        <View style={styles.actions}>
-         {props.children}
-        </View>
-      </Card>
-    </TouchableCmp>
+    <Card style={styles.product}>
+      <View style={styles.touchable}>
+        <TouchableCmp onPress={props.onSelect} useForeground>
+          <View>
+            <View style={styles.imageContainer}>
+              <Image style={styles.image} source={{ uri: props.image }} />
+            </View>
+            <View style={styles.details}>
+              <Text style={styles.title}>{props.title}</Text>
+              <Text style={styles.price}>${+props.price.toFixed(2)}</Text>
+            </View>
+            <View style={styles.actions}>{props.children}</View>
+          </View>
+        </TouchableCmp>
+      </View>
+    </Card>
   );
 };
 
 const styles = StyleSheet.create({
-  product: {   
+  product: {
     height: 300,
     margin: 20,
+  },
+  touchable: {
+    borderRadius: 10,
+    overflow: "hidden",
   },
   imageContainer: {
     width: "100%",
@@ -60,12 +63,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     height: "17%",
     padding: 10,
-    fontFamily: 'open-sans'
+    fontFamily: "open-sans",
   },
   title: {
     fontSize: 18,
     marginVertical: 2,
-    fontFamily: 'open-sans-bold'
+    fontFamily: "open-sans-bold",
   },
   price: {
     fontSize: 14,
@@ -77,7 +80,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     height: "23%",
     paddingHorizontal: 20,
-    fontFamily: 'open-sans'
+    fontFamily: "open-sans",
   },
 });
 

@@ -6,11 +6,13 @@ import AppLoading from "expo-app-loading";
 import * as Font from "expo-font";
 import { Provider } from "react-redux";
 import productReducers from "./store/reducers/productReducers";
+import cartReducers from "./store/reducers/cartReducers";
 import AppNavigator from "./navigation/AppNavigator";
 
 // root-reducr setup so we can have access to all reducers for state management
 const rootReducer = combineReducers({
   products: productReducers,
+  cart: cartReducers, 
 });
 
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk)); //We can use devtools here as another argument: composeWithDevTools() - Make sure to remove before deployment

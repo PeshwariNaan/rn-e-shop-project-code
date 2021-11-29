@@ -5,11 +5,19 @@ import ProductOverviewScreen, {
   screenOptions as ProductOverviewScreenOptions,
 } from "../screens/shop/ProductOverviewScreen";
 import Colors from "../constants/Colors";
+import ProductDetailsScreen, {screenOptions as ProductDetailsScreenOptions } from '../screens/shop/ProductDetailsScreen'
+import CartScreen, {screenOptions as CartScreenOptions} from "../screens/shop/CartScreen";
 
 //Set up default nav options
 const defaultNavOptions = {
   headerStyle: {
     backgroundColor: Platform.OS === "android" ? Colors.primary : "",
+  },
+  headerTitleStyle: {
+    fontFamily: 'open-sans-bold'
+  },
+  headerBackTitleStyle: {
+    fontFamily: 'open-sans'
   },
   headerTintColor: Platform.OS === "android" ? "white" : Colors.primary,
 };
@@ -25,6 +33,16 @@ export const ProductsNavigator = () => {
         component={ProductOverviewScreen}
         options={ProductOverviewScreenOptions}
       />
+    <ProductsStackNavigator.Screen 
+      name="ProductDetail"
+      component={ProductDetailsScreen}
+      options={ProductDetailsScreenOptions}
+    />
+    <ProductsStackNavigator.Screen
+    name="Cart"
+    component={CartScreen}
+    options={CartScreenOptions}
+    />
     </ProductsStackNavigator.Navigator>
   );
 };
