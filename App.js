@@ -8,11 +8,13 @@ import { Provider } from "react-redux";
 import productReducers from "./store/reducers/productReducers";
 import cartReducers from "./store/reducers/cartReducers";
 import AppNavigator from "./navigation/AppNavigator";
+import orderReducer from "./store/reducers/orderReducer";
 
 // root-reducr setup so we can have access to all reducers for state management
 const rootReducer = combineReducers({
   products: productReducers,
   cart: cartReducers, 
+  orders: orderReducer
 });
 
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk)); //We can use devtools here as another argument: composeWithDevTools() - Make sure to remove before deployment

@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, FlatList, Button } from "react-native";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Card from "../../components/UI/Card";
 import Colors from "../../constants/Colors";
 import CartItem from '../../components/shop/CartItem'
+import * as cartActions from '../../store/actions/cartActions'
+import * as orderActions from '../../store/actions/orderActions'
 
 const CartScreen = (props) => {
+const dispatch = useDispatch()
   const [isLoading, setIsLoading] = useState(false);
   const cartTotalAmount = useSelector((state) => state.cart.totalAmount);
   const cartItems = useSelector((state) => {
@@ -41,7 +44,9 @@ const CartScreen = (props) => {
             color={Colors.accent}
             title="Order Now"
             disabled={cartItems.length === 0}
-           
+            onPress={() => {
+              dispatch(orderActions.addOrder(cartItems, cartTotalAmount))
+            }}
           />
         )}
       </Card>
@@ -55,7 +60,7 @@ const CartScreen = (props) => {
             amount={itemData.item.sum}
             deletable
             onRemove={() => {
-              
+              dispatch(cartActions.removeFromCart(itemData.item.productId))
             }}
           />
         )}
