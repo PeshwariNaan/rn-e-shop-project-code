@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import ProductItem from "../../components/shop/ProductItem";
 import { useSelector, useDispatch } from "react-redux";
+import { Ionicons } from "@expo/vector-icons";
 import Colors from "../../constants/Colors";
 import * as CartActions from '../../store/actions/cartActions'
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
@@ -66,7 +67,9 @@ export const screenOptions = navData => {
             <Item
             title='Menu'
             iconName={Platform.OS === 'android' ? 'md-menu' : 'ios-menu'}
-            onPress={() => {}}
+            onPress={() => {
+              navData.navigation.toggleDrawer();
+            }}
             />
           </HeaderButtons>
         ),
@@ -86,4 +89,6 @@ export const screenOptions = navData => {
 
 export default ProductOverviewScreen;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  centered: { flex: 1, justifyContent: 'center', alignItems: 'center' }
+});
