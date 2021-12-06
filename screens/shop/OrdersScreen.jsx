@@ -11,6 +11,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import HeaderButton from "../../components/UI/HeaderButton";
 import Colors from "../../constants/Colors";
+import OrderItem from "../../components/shop/OrderItem";
 
 const OrdersScreen = (props) => {
   const [isLoading, setIsLoading] = useState(false);
