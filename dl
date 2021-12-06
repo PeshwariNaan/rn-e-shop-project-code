@@ -1,0 +1,65 @@
+[33mcommit 3104da26aa7b92fd13d5a39386f47d7e36a5c9e1[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: JD Browne <jdbrowne01@gmail.com>
+Date:   Mon Dec 6 11:47:17 2021 -0700
+
+    changed readme
+
+[33mcommit c646990539d9113990c7cb9f6d4ac97aa66722d7[m[33m ([m[1;31morigin/master[m[33m)[m
+Author: JD Browne <jdbrowne01@gmail.com>
+Date:   Mon Dec 6 11:41:31 2021 -0700
+
+    Changed cart reducer to clear cart when the orderbutton is pushed
+
+[33mcommit 351e1d2e7cfe781dde2b1a31543bffad687db10d[m
+Author: JD Browne <jdbrowne01@gmail.com>
+Date:   Mon Dec 6 11:40:00 2021 -0700
+
+    Created OrderItem to output the orders. Changed order model to be able to output date using moment module
+
+[33mcommit 6ed83e81431d907cebafb02ecda17c7034c44efe[m
+Author: JD Browne <jdbrowne01@gmail.com>
+Date:   Mon Dec 6 10:49:37 2021 -0700
+
+    Implemented orders screen, updated ProductOverviewScreen
+
+[33mcommit 76ace420cf00b2a94937e8b256138a3afeda00f8[m
+Author: JD Browne <jdbrowne01@gmail.com>
+Date:   Mon Dec 6 10:47:14 2021 -0700
+
+    Added drawer navigation to ShopNavigator and updated AppNavigator to use drawer navigator as primary
+
+[33mcommit efe3ddc7ad199f7b8830ae39e27b964ec0e994a5[m
+Author: Your Name <you@eaxample.com>
+Date:   Tue Nov 30 12:06:26 2021 -0700
+
+    Added order reducer and actions file and tied to order button in cart screen. Set up order model
+
+[33mcommit 0f8294d5768f3aab19d82ce1b25a7e2fe49c6469[m
+Author: Your Name <you@eaxample.com>
+Date:   Mon Nov 29 10:27:41 2021 -0700
+
+    Added CartItem model and shop component, header buttons and implemented CartScreen functionality.
+
+[33mcommit b5fa0bd38d467035bac57f4731cc093bb81fc6f5[m
+Author: Your Name <you@eaxample.com>
+Date:   Sat Nov 27 09:09:52 2021 -0700
+
+    Added buttons to ProductItem via props for PRoductOverviewScreen. Updated styling and annotations
+
+[33mcommit 78fc96f7e089292e84f7350aa97c22e3449046d9[m
+Author: Your Name <you@eaxample.com>
+Date:   Fri Nov 26 15:20:48 2021 -0700
+
+    Set up first part of navigation. Added ProductItem and Card components and styling and updated ProductOverviewScreen
+
+[33mcommit ed7b875eee01417df5ed9443acd3589bf9e38d5b[m
+Author: Your Name <you@eaxample.com>
+Date:   Fri Nov 26 10:03:16 2021 -0700
+
+    Commit for the initial setup for the project. Added all relative screens, dummy data for developement, installed redux packages for state management and initial setup of store
+
+[33mcommit 5778110c850c74365eaf869d58dd56b7a56928cf[m
+Author: Your Name <you@eaxample.com>
+Date:   Thu Nov 25 10:42:42 2021 -0700
+
+    Created a new Expo app

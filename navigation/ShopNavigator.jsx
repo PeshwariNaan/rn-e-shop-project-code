@@ -29,6 +29,7 @@ import CartScreen, {
 import OrdersScreen, {
   screenOptions as OrdersScreenOptions,
 } from "../screens/shop/OrdersScreen";
+import UserProductScreen, { screenOptions as UserProductScreenOptions} from "../screens/user/UserProductScreen";
 import { NavigationContainer } from "@react-navigation/native";
 
 //Set up default nav options
@@ -83,6 +84,20 @@ export const OrdersNavigator = () => {
         options={OrdersScreenOptions}
       />
     </OrdersStackNavigator.Navigator>
+  );
+};
+
+const AdminStackNavigator = createStackNavigator();
+
+export const AdminNavigator = () => {
+  return (
+    <AdminStackNavigator.Navigator screenOptions={defaultNavOptions}>
+      <AdminStackNavigator.Screen
+        name="UserProducts"
+        component={UserProductScreen}
+        options={UserProductScreenOptions}
+      />
+    </AdminStackNavigator.Navigator>
   );
 };
 
@@ -142,6 +157,19 @@ export const ShopNavigator = () => {
           drawerIcon: (props) => (
             <Ionicons
               name={Platform.OS === "android" ? "md-list" : "ios-list"}
+              size={23}
+              color={props.color}
+            />
+          ),
+        }}
+      />
+      <ShopDrawerNavigator.Screen
+        name="Admin"
+        component={AdminNavigator}
+        options={{
+          drawerIcon: (props) => (
+            <Ionicons
+              name={Platform.OS === "android" ? "md-create" : "ios-create"}
               size={23}
               color={props.color}
             />
