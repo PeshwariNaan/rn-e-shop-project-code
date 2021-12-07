@@ -34,7 +34,8 @@ const dispatch = useDispatch()
         <Text style={styles.summaryText}>
           Total:
           <Text style={styles.amount}>
-            ${Math.round(cartTotalAmount.toFixed(2) * 100) / 100}
+          {/* This fixes the problem where js will display a negative after removing things from cart */}
+            ${Math.round(cartTotalAmount.toFixed(2) * 100) / 100} 
           </Text>         
         </Text>
         {isLoading ? (

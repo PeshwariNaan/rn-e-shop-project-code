@@ -30,6 +30,7 @@ import OrdersScreen, {
   screenOptions as OrdersScreenOptions,
 } from "../screens/shop/OrdersScreen";
 import UserProductScreen, { screenOptions as UserProductScreenOptions} from "../screens/user/UserProductScreen";
+import EditProductScreen, { screenOptions as EditProductScreenOptions} from "../screens/user/EditProductScreen";
 import { NavigationContainer } from "@react-navigation/native";
 
 //Set up default nav options
@@ -97,7 +98,13 @@ export const AdminNavigator = () => {
         component={UserProductScreen}
         options={UserProductScreenOptions}
       />
+       <AdminStackNavigator.Screen
+        name="EditProducts"
+        component={EditProductScreen}
+        options={EditProductScreenOptions}
+      />
     </AdminStackNavigator.Navigator>
+    
   );
 };
 
