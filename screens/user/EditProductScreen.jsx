@@ -11,10 +11,13 @@ import {
   ActivityIndicator,
 } from "react-native";
 import { useSelector, useDispatch } from 'react-redux';
+import { HeaderButtons, Item } from 'react-navigation-header-buttons';
+import HeaderButton from '../../components/UI/HeaderButton';
+import * as productActions from '../../store/actions/productActions'
 
 const EditProductScreen = (props) => {
   const prodId = props.route.params ? props.route.params.productId : null;
-
+    const dispatch = useDispatch()
   //Pull in data for product so we can pre-populate the fields when in edit mode
   const editedProduct = useSelector((state) =>
     state.products.userProducts.find((prod) => prod.id === prodId)
@@ -28,6 +31,31 @@ const EditProductScreen = (props) => {
   const [description, setDescription] = useState(
     editedProduct ? editedProduct.description : ""
   );
+
+  //The use callBack here makes it so the function is not recreated on every re-render of the page - We avoid an infinite loop this way
+  const submitHandler = useCallback(() => {
+    if(editedProduct) {
+        dispatch(productActions.updateProduct(prodId, title, description, imageUrl))
+    }else {
+        dispatch(productActions.createProduct(title, description, imageUrl, +price))
+    }
+  }, [dispatch, prodId, title, description, imageUrl, price]) // These do change so we must add to the dependency array or it won't update the values
+
+  useEffect(() => {
+    props.navigation.setOptions({
+        headerRight: () => (
+          <HeaderButtons HeaderButtonComponent={HeaderButton}>
+            <Item
+              title="Save"
+              iconName={
+                Platform.OS === 'android' ? 'md-checkmark' : 'ios-checkmark'
+              }
+              onPress={submitHandler}
+            />
+          </HeaderButtons>
+        )
+      });
+  },[submitHandler])
 
   return (
     <ScrollView>
