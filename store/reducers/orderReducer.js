@@ -7,6 +7,10 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case orderActions.SET_ORDERS:
+      return {
+        orders: action.orders
+      };
     case orderActions.ADD_ORDER:
       const newOrder = new Order(
         action.orderData.id,

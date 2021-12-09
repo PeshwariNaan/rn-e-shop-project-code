@@ -1,4 +1,37 @@
+import Order from '../../models/order';
+
 export const ADD_ORDER = 'ADD_ORDER';
+export const SET_ORDERS = 'SET_ORDERS';
+
+export const fetchOrders = () => {
+    return async (dispatch, getState) => {
+      try {
+        const response = await fetch(
+          `https://react-native-shop-f6bef-default-rtdb.firebaseio.com/orders/u1.json`
+        );  
+        if (!response.ok) {
+          throw new Error('Something went wrong!');
+        }  
+        const resData = await response.json();
+        const loadedOrders = [];
+  
+        for (const key in resData) {
+          loadedOrders.push(
+            new Order(
+              key,
+              resData[key].cartItems,
+              resData[key].totalAmount,
+              new Date(resData[key].date) //We need a date object here  - this is why we wrapped the resData[key].date which is a string
+            )
+          );
+        }
+        dispatch({ type: SET_ORDERS, orders: loadedOrders });
+      } catch (err) {
+        throw err;
+      }
+    };
+  };
+  
 
 export const addOrder = (cartItems, totalAmount) => {
     return async (dispatch, getState) => {     
@@ -21,7 +54,7 @@ export const addOrder = (cartItems, totalAmount) => {
         throw new Error('Something went wrong!');
       }  
       const resData = await response.json();
-        
+
       dispatch({
         type: ADD_ORDER,
         orderData: {

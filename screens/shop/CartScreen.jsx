@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, FlatList, Button } from "react-native";
+import { StyleSheet, Text, View, FlatList, Button, ActivityIndicator } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import Card from "../../components/UI/Card";
 import Colors from "../../constants/Colors";
@@ -9,6 +9,7 @@ import * as orderActions from '../../store/actions/orderActions'
 
 const CartScreen = (props) => {
 const dispatch = useDispatch()
+
   const [isLoading, setIsLoading] = useState(false);
   const cartTotalAmount = useSelector((state) => state.cart.totalAmount);
   const cartItems = useSelector((state) => {
@@ -28,6 +29,12 @@ const dispatch = useDispatch()
     );
   });
 
+  const sendOrderHandler = async () => {
+    setIsLoading(true);
+    await dispatch(orderActions.addOrder(cartItems, cartTotalAmount));
+    setIsLoading(false);
+  };
+
   return (
     <View style={styles.screen}>
       <Card style={styles.summary}>
@@ -45,9 +52,7 @@ const dispatch = useDispatch()
             color={Colors.accent}
             title="Order Now"
             disabled={cartItems.length === 0}
-            onPress={() => {
-              dispatch(orderActions.addOrder(cartItems, cartTotalAmount))
-            }}
+            onPress={sendOrderHandler}
           />
         )}
       </Card>
