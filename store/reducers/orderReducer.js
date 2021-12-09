@@ -9,10 +9,10 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case orderActions.ADD_ORDER:
       const newOrder = new Order(
-        new Date().toString(),  // temp id before we implement the firebase db
+        action.orderData.id,
         action.orderData.items,
         action.orderData.amount,
-        new Date()
+        action.orderData.date
       );
       return {
         ...state,
