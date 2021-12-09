@@ -8,6 +8,7 @@ import * as productActions from "../../store/actions/productActions";
 import ProductItem from '../../components/shop/ProductItem'
 
 const UserProductScreen = (props) => {
+
     const userProducts = useSelector(state => state.products.userProducts);
   const dispatch = useDispatch();
 

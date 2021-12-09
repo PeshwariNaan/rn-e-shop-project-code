@@ -43,6 +43,9 @@ const formReducer = (state, action) => {
 };
 
 const EditProductScreen = (props) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState();
+
   const prodId = props.route.params ? props.route.params.productId : null;
   const dispatch = useDispatch();
   //Pull in data for product so we can pre-populate the fields when in edit mode
@@ -67,25 +70,35 @@ const EditProductScreen = (props) => {
     formIsValid: editedProduct ? true : false
   });
 
+  //This useEffect call is used only to detect an error when editing a product
+  useEffect(() => {
+    if (error) {
+      Alert.alert('An error occurred!', error, [{ text: 'Okay' }]);
+    }
+  }, [error]);
+
   //The use callBack here makes it so the function is not recreated on every re-render of the page - We avoid an infinite loop this way
-  const submitHandler = useCallback(() => {
+  const submitHandler = useCallback(async () => {
     if (!formState.formIsValid) {
       Alert.alert('Wrong input!', 'Please check the errors in the form.', [
         { text: 'Okay' }
       ]);
       return;
     }
+    setError(null);
+    setIsLoading(true);
+    try {
     if (editedProduct) {
-      dispatch(
+      await dispatch(
         productActions.updateProduct(
           prodId,
           formState.inputValues.title,
           formState.inputValues.description,
           formState.inputValues.imageUrl
         )
-      );
+      ); // We can use .then() here if we don't want to use async/await
     } else {
-      dispatch(
+      await dispatch(
         productActions.createProduct(
           formState.inputValues.title,
           formState.inputValues.description,
@@ -95,6 +108,9 @@ const EditProductScreen = (props) => {
       );
     }
     props.navigation.goBack();
+  }catch (err) {
+    setError(err.message)
+  }
   }, [dispatch, prodId, formState]); // These do change so we must add to the dependency array or it won't update the values
 
 
@@ -125,6 +141,14 @@ const EditProductScreen = (props) => {
     },
     [dispatchFormState]
   );
+
+  if (isLoading) {
+    return (
+      <View style={styles.centered}>
+        <ActivityIndicator size="large" color={Colors.primary} />
+      </View>
+    );
+  }
 
   return (
     <KeyboardAvoidingView
