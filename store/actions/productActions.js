@@ -1,31 +1,55 @@
 export const DELETE_PRODUCT = "DELETE_PRODUCT";
-export const CREATE_PRODUCT = 'CREATE_PRODUCT';
-export const UPDATE_PRODUCT = 'UPDATE_PRODUCT';
-export const SET_PRODUCTS = 'SET_PRODUCTS';
+export const CREATE_PRODUCT = "CREATE_PRODUCT";
+export const UPDATE_PRODUCT = "UPDATE_PRODUCT";
+export const SET_PRODUCTS = "SET_PRODUCTS";
 
-export const deleteProduct = productId => {
-    return { type: DELETE_PRODUCT, pid: productId }
-}
+//Note** Our reducers must be synchronous but with the addition of redux thunk - We can include async code in our action creators
 
+export const deleteProduct = (productId) => {
+  return { type: DELETE_PRODUCT, pid: productId };
+};
+
+// When we add redux thunk, the action creators don't have to automatically return teh action and payload - Instaed we use the dispatch method and we can return a function and we can execute any async code we want
 export const createProduct = (title, description, imageUrl, price) => {
-    return {
-        type: CREATE_PRODUCT, productData: {
-            title,
-            description,
-            imageUrl,
-            price
-        }
-    }
-}
-
-export const updateProduct = (id, title, description, imageUrl) => {
-    return {
-      type: UPDATE_PRODUCT,
-      pid: id,
+  return async (dispatch) => {
+    const response = await fetch(
+      "https://react-native-shop-f6bef-default-rtdb.firebaseio.com/products.json",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          title,
+          imageUrl,
+          description,          
+          price,
+        }),
+      }
+    );
+    const resData = await response.json();
+    console.log(resData);
+    dispatch({
+      type: CREATE_PRODUCT,
       productData: {
+        id: resData.name,
         title,
         description,
         imageUrl,
-      }
-    };
+        price,
+      },
+    });
   };
+};
+
+export const updateProduct = (id, title, description, imageUrl) => {
+  return {
+    type: UPDATE_PRODUCT,
+    pid: id,
+    productData: {
+      title,
+      description,
+      imageUrl,
+    },
+  };
+};

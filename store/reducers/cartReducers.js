@@ -3,6 +3,8 @@ import * as CartActionTypes from "../actions/cartActions";
 import { ADD_ORDER } from "../actions/orderActions";
 import { DELETE_PRODUCT } from "../actions/productActions";
 
+//Note** Our reducers must be synchronous but with the addition of redux thunk - We can include async code in our action creators
+
 const initialState = {
   items: {},
   totalAmount: 0,
