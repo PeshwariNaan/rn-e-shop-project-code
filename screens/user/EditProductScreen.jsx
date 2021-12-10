@@ -3,8 +3,6 @@ import {
   View,
   ScrollView,
   StyleSheet,
-  Text,
-  TextInput,
   Platform,
   Alert,
   KeyboardAvoidingView,
@@ -15,6 +13,7 @@ import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import HeaderButton from "../../components/UI/HeaderButton";
 import * as productActions from "../../store/actions/productActions";
 import Input from '../../components/UI/Input'
+import Colors from "../../constants/Colors";
 
 //Including a reducer so we can manage what would be multiple states but they are related. All states we would have for form validity for the different inputs can be combined here
 const FORM_INPUT_UPDATE = 'FORM_INPUT_UPDATE';
@@ -55,7 +54,7 @@ const EditProductScreen = (props) => {
 
   // Use reducer will always have a state snapshot and a fuction taht will allow to dispatch actions
   const [formState, dispatchFormState] = useReducer(formReducer, {
-    inputValues: { // Moved the individual state calls here and the reducer will change the state instead of dealing with them individually
+    inputValues: { // Moved the individual state calls here and the reducer will change multiple states (because they are related) instead of dealing with them individually
       title: editedProduct ? editedProduct.title : '',
       imageUrl: editedProduct ? editedProduct.imageUrl : '',
       description: editedProduct ? editedProduct.description : '',

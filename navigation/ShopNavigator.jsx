@@ -2,20 +2,12 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import {
   createDrawerNavigator,
-  DrawerContentScrollView,
   DrawerItemList,
-  DrawerItem,
 } from "@react-navigation/drawer";
-import {
-  Platform,
-  SafeAreaView,
-  Button,
-  View,
-  StyleSheet,
-  Text,
-} from "react-native";
+import { Platform, SafeAreaView, Button, View } from "react-native";
 import { useDispatch } from "react-redux";
 import { Ionicons } from "@expo/vector-icons";
+import * as authActions from '../store/actions/authActions'
 import ProductOverviewScreen, {
   screenOptions as ProductOverviewScreenOptions,
 } from "../screens/shop/ProductOverviewScreen";
@@ -29,9 +21,15 @@ import CartScreen, {
 import OrdersScreen, {
   screenOptions as OrdersScreenOptions,
 } from "../screens/shop/OrdersScreen";
-import UserProductScreen, { screenOptions as UserProductScreenOptions} from "../screens/user/UserProductScreen";
-import EditProductScreen, { screenOptions as EditProductScreenOptions} from "../screens/user/EditProductScreen";
-import { NavigationContainer } from "@react-navigation/native";
+import UserProductScreen, {
+  screenOptions as UserProductScreenOptions,
+} from "../screens/user/UserProductScreen";
+import EditProductScreen, {
+  screenOptions as EditProductScreenOptions,
+} from "../screens/user/EditProductScreen";
+import AuthScreen, {
+  screenOptions as AuthScreenOptions,
+} from "../screens/user/AuthScreen";
 
 //Set up default nav options
 const defaultNavOptions = {
@@ -98,13 +96,26 @@ export const AdminNavigator = () => {
         component={UserProductScreen}
         options={UserProductScreenOptions}
       />
-       <AdminStackNavigator.Screen
+      <AdminStackNavigator.Screen
         name="EditProducts"
         component={EditProductScreen}
         options={EditProductScreenOptions}
       />
     </AdminStackNavigator.Navigator>
-    
+  );
+};
+
+const AuthStackNavigator = createStackNavigator();
+
+export const AuthNavigator = () => {
+  return (
+    <AuthStackNavigator.Navigator screenOptions={defaultNavOptions}>
+      <AuthStackNavigator.Screen
+        name="Auth"
+        component={AuthScreen}
+        options={AuthScreenOptions}
+      />
+    </AuthStackNavigator.Navigator>
   );
 };
 
@@ -124,7 +135,9 @@ export const ShopNavigator = () => {
               <Button
                 title="Logout"
                 color={Colors.primary}
-                onPress={() => {}}
+                onPress={() => {
+                  dispatch(authActions.logout())
+                }}
               />
             </SafeAreaView>
           </View>
